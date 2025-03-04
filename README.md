@@ -39,4 +39,4 @@ According to the ANSI SQL standard, the isolation levels can be classified into 
 
 ## Big Thanks
 A Big Thanks to my Thesis Advisor
-* **Professor Liao**, Department of Computer Science, National Cengchi University
+* **Professor Liao**, Department of Computer Science, National Chengchi University
