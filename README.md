@@ -1,24 +1,35 @@
 # Distributed-Queued-Transaction
-以 Zookeeper 作為 Global Distributed Locking Service，實作 Queued Transaction的Queue機制，與Two Phase Commit中
- Controller 與 Cohorts 間的 Prepate Phase & Commit/Abort Phase 確認
- 
+It's my Master's Thesis in Coputer Seceince about the design and implementation of an **optimized Two Phase Commit transcation system**.
+## Design Description
+Message translation uses the MQTT protocol to solve the request **staving** issue, improving system efficiency and network resource utilization. Apache Zookeeper is used to design the distributed lock mechanism, implementing the message acknowledgment process in 2PC, as well as the mechanism for queueing database access in different isolation levels.
+
  ### Two Phase Commit
 ---
- ### Queued Transaction
- ---
  ### Isolation Level
-1. Read Uncommitted :
-> * 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取、更新。
-> * 目前的資料欄位有交易正在更新時，其他的交易可以對該欄位進行讀取，但無法進行更新。
+According to the ANSI SQL standard, the isolation levels can be classified into the following four types:
+ 1. Read Uncommitted :
+   * When a transaction is currently reading a data field, other transactions can read and write to that field.
+   * When a transaction is currently writing to a data field, other transactions can read the field but cannot write to it.
+ > 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取、更新。 </br>
+ > 目前的資料欄位有交易正在更新時，其他的交易可以對該欄位進行讀取，但無法進行更新。
+ 
+ 2. Read Committed
+    * When a transaction is currently reading a data field, other transactions can read and write to that field.
+    * When a transaction is currently writing to a data field, other transactions cannot read or write to that field.
+ > 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取、更新。
+ > 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
+ 
+ 3. Repeatable Read
+    * When a transaction is currently reading a data field, other transactions can read the field but cannot write to it.
+    * When a transaction is currently writing to a data field, other transactions cannot read or write to that field.
+ > 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取，但無法進行更新。
+ > 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
+ 
+ 4. Serializable
+    * When a transaction is currently reading a data field, other transactions cannot read or write to that field.
+    * When a transaction is currently writing to a data field, other transactions cannot read or write to that field.
+ > 當目前的資料欄位有交易正在讀取時，其他的交易無法對該欄位進行讀取、更新。
+ > 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
 
-2. Read Committed
-> * 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取、更新。
-> * 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
-
-3. Repeatable Read
-> * 當目前的資料欄位有交易正在讀取時，其他的交易可以對該欄位進行讀取，但無法進行更新。
-> * 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
-
-4. Serializable
-> * 當目前的資料欄位有交易正在讀取時，其他的交易無法對該欄位進行讀取、更新。
-> * 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
+## Awards and Hornors
+* **2023 台灣軟體工程演討會(TCSE) - 最佳中文論文獎** 
