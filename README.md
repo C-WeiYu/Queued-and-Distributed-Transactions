@@ -34,5 +34,9 @@ According to the ANSI SQL standard, the isolation levels can be classified into 
  > 當目前的資料欄位有交易正在讀取時，其他的交易無法對該欄位進行讀取、更新。</br>
  > 目前的資料欄位有交易正在更新時，其他的交易無法對該欄位進行讀取、更新。
 
-## Awards and Hornors
+## Awards and Honors
 [**2023 台灣軟體工程演討會(TCSE) - 最佳中文論文獎**](https://tcse2023.seat.org.tw/)
+
+## Big Thanks
+A Big Thanks to my Thesis Advisor
+* **Professor Liao**, Department of Computer Science, National Cengchi University
